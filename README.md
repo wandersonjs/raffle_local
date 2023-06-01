@@ -1,16 +1,11 @@
 # raffle_local
 
-A new Flutter project.
+A simple local raffle system made for fun
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Hello, welcome to the raffle local system, the current project was made for fun, but is fully operational allowing to 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1- Create a Raffle
+2- Sort numbers
+3- Show raffle results
