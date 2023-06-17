@@ -272,14 +272,14 @@ class RaffleController extends ControllerMVC {
 
   void raffle(context) {
     //Verifies if the sold nums size are bigger than zero, if so the raffle runs, else shows an alert saying that no numbers where sold
-    if (raffleSoldNums.length > 0) {
+    if (raffleSoldNums.isNotEmpty) {
       Timer sort = Timer(raffleTime, () {
         Navigator.of(context, rootNavigator: true).pop();
       });
       showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return const AlertDialog(
             title: Text("Raffling"),
             content: CircularProgressIndicator(),
           );
@@ -287,7 +287,7 @@ class RaffleController extends ControllerMVC {
       ).then((value) {
         sort.cancel();
       });
-      sorteado = Random().nextInt(raffleDetails.max);
+      sorteado = Random().nextInt(raffleDetails.max);//Random number between 1 and the raffle max quotas
       Timer.periodic(
         raffleTime,
         (timer) {
@@ -295,7 +295,7 @@ class RaffleController extends ControllerMVC {
           setState(() {
             finished = true;
           });
-          raffleSoldNums.forEach((num) {
+          for (var num in raffleSoldNums) {
             if (num.number == sorteado) {
               setState(() {
                 winner = {
@@ -304,7 +304,7 @@ class RaffleController extends ControllerMVC {
                 };
               });
             }
-          });
+          }
           if (winner.isNotEmpty) {
             showDialog(
               context: context,
@@ -312,9 +312,9 @@ class RaffleController extends ControllerMVC {
                 return AlertDialog(
                   title: Text(
                     "Drawn number: ${winner['number']}",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  content: Container(
+                  content: SizedBox(
                     height: 100,
                     child: Column(
                       children: [
@@ -333,7 +333,7 @@ class RaffleController extends ControllerMVC {
                         getEarnigs(context);
                         timer.cancel();
                       },
-                      child: Text("OK"),
+                      child: const Text("OK"),
                     )
                   ],
                 );
@@ -351,7 +351,7 @@ class RaffleController extends ControllerMVC {
                   title: Text(
                     "Drawn number: $sorteado",
                   ),
-                  content: Text(
+                  content: const Text(
                     "Unfortunately we didn't have any winners this time.",
                   ),
                   actions: [
@@ -361,7 +361,7 @@ class RaffleController extends ControllerMVC {
                         getEarnigs(context);
                         timer.cancel();
                       },
-                      child: Text("OK"),
+                      child: const Text("OK"),
                     )
                   ],
                 );
@@ -379,10 +379,10 @@ class RaffleController extends ControllerMVC {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(
+            title: const Text(
               "You haven't sold any number",
             ),
-            content: Text(
+            content: const Text(
               "You need to sell at least one number to sell the draw",
             ),
             actions: [
@@ -390,7 +390,7 @@ class RaffleController extends ControllerMVC {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("OK"),
+                child: const Text("OK"),
               )
             ],
           );
@@ -401,10 +401,11 @@ class RaffleController extends ControllerMVC {
 
   //Gets the total earnings
   void getTotalEarnings() {
-    raffleSoldNums.forEach((element) {
+    // ignore: unused_local_variable
+    for (var element in raffleSoldNums) {
       total += raffleDetails.quotaValue;
       setState(() {});
-    });
+    }
 
     liquidEarning = total - raffleDetails.premiumValue;
     setState(() {});
@@ -416,7 +417,7 @@ class RaffleController extends ControllerMVC {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Raffle details"),
+          title: const Text("Raffle details"),
           content: SizedBox(
             height: 100,
             child: Column(
@@ -425,21 +426,21 @@ class RaffleController extends ControllerMVC {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Premium"),
+                    const Text("Premium"),
                     Text(raffleDetails.premiumDescription)
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Premium value"),
+                    const Text("Premium value"),
                     Text("\$ ${raffleDetails.premiumValue}")
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Quota price"),
+                    const Text("Quota price"),
                     Text("\$ ${raffleDetails.quotaValue}")
                   ],
                 )
@@ -449,7 +450,7 @@ class RaffleController extends ControllerMVC {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text("Ok"),
+              child: const Text("Ok"),
             )
           ],
         );
@@ -466,13 +467,13 @@ class RaffleController extends ControllerMVC {
         return AlertDialog(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const  [
               Text(
                 "Earnings",
               ),
             ],
           ),
-          content: Container(
+          content: SizedBox(
             height: 100,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -480,7 +481,7 @@ class RaffleController extends ControllerMVC {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Premium value"),
+                    const Text("Premium value"),
                     Text(
                       "\$ ${raffleDetails.premiumValue}",
                       style: TextStyle(color: Colors.green),
@@ -490,7 +491,7 @@ class RaffleController extends ControllerMVC {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Sold"),
+                    const Text("Sold"),
                     Text(
                       "\$ $total",
                       style: TextStyle(color: Colors.green),
@@ -501,7 +502,7 @@ class RaffleController extends ControllerMVC {
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Earning"),
+                          const Text("Earning"),
                           Text(
                             "\$ $liquidEarning",
                             style: TextStyle(
@@ -514,10 +515,10 @@ class RaffleController extends ControllerMVC {
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Earning"),
+                          const Text("Earning"),
                           Text(
                             "R\$ $total",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.green,
                             ),
                           ),
@@ -537,7 +538,7 @@ class RaffleController extends ControllerMVC {
                   });
                 }
               },
-              child: Text("Close"),
+              child: const Text("Close"),
             )
           ],
         );
@@ -547,7 +548,7 @@ class RaffleController extends ControllerMVC {
 
   //Shows an alert with all the selling numbers
   void showSellingNumbers(context) {
-    if (raffleSellingNums.length >= 1 && total >= 0) {
+    if (raffleSellingNums.isNotEmpty && total >= 0) {
       showDialog(
         context: context,
         builder: (context) {
@@ -558,7 +559,7 @@ class RaffleController extends ControllerMVC {
                 Container(
                   height: 50,
                   width: 200,
-                  padding: EdgeInsetsDirectional.all(5),
+                  padding: const EdgeInsetsDirectional.all(5),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       color: Colors.blue),
@@ -569,24 +570,24 @@ class RaffleController extends ControllerMVC {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text("Total: R\$ $total"),
               ],
             ),
-            content: Container(
+            content: SizedBox(
               height: 250,
               width: 100,
               child: Form(
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 148,
                       width: 400,
                       child: GridView.builder(
                         itemCount: raffleSellingNums.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           crossAxisSpacing: 10,
                           childAspectRatio: 2.2,
@@ -599,14 +600,12 @@ class RaffleController extends ControllerMVC {
                               color: Colors.amber,
                             ),
                             child: TextButton(
-                              child: Container(
-                                child: Center(
-                                  child: Text(
-                                    raffleSellingNums[index].number.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                              child: Center(
+                                child: Text(
+                                  raffleSellingNums[index].number.toString(),
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ),
                               onPressed: () {},
@@ -621,7 +620,7 @@ class RaffleController extends ControllerMVC {
                           _buyer = value;
                         });
                       },
-                      decoration: InputDecoration(),
+                      decoration: const InputDecoration(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please inform the buyer";
@@ -639,7 +638,7 @@ class RaffleController extends ControllerMVC {
                   confirmSelling();
                   Navigator.of(context).pop();
                 },
-                child: Text(
+                child: const Text(
                   "Confirm",
                   style: TextStyle(
                     color: Colors.green,
@@ -647,7 +646,7 @@ class RaffleController extends ControllerMVC {
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.plus_one_rounded),
+                icon: const Icon(Icons.plus_one_rounded),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -658,7 +657,7 @@ class RaffleController extends ControllerMVC {
                   cancelSelling();
                   Navigator.of(context).pop();
                 },
-                child: Text(
+                child: const Text(
                   "Cancel",
                   style: TextStyle(
                     color: Colors.red,
@@ -674,14 +673,14 @@ class RaffleController extends ControllerMVC {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Whoops"),
-            content: Text("The cart is empty"),
+            title: const Text("Whoops"),
+            content: const Text("The cart is empty"),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("OK"),
+                child: const Text("OK"),
               ),
             ],
           );
