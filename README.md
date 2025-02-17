@@ -1,11 +1,13 @@
-# raffle_local
+#Raffle_Local
+A fun and straightforward local raffle system
 
-A simple local raffle system made for fun
+##Getting Started
+Welcome to the Raffle_Local system! This project, although created for fun, is fully functional and provides the following features:
 
-## Getting Started
+Create a Raffle: Set up your own raffle effortlessly.
 
-Hello, welcome to the raffle local system, the current project was made for fun, but is fully operational allowing to 
+Sort Numbers: Randomly generate numbers for the raffle.
 
-1- Create a Raffle
-2- Sort numbers
-3- Show raffle results
+Show Raffle Results: Display the results of the raffle in an organized manner.
+
+Whether you’re hosting a small gathering or just looking for a fun project to play around with, Raffle_Local has got you covered!
