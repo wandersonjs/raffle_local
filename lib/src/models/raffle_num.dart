@@ -6,9 +6,9 @@ class RaffleNum {
   RaffleNum({required this.index, required this.number, required this.buyer});
 
   RaffleNum.fromJSON(Map<String, dynamic> jsonMap) {
-    this.index = jsonMap['index'];
-    this.number = jsonMap['number'];
-    this.buyer = jsonMap['buyer'] ?? jsonMap['buyer'];
+    index = jsonMap['index'];
+    number = jsonMap['number'];
+    buyer = jsonMap['buyer'] ?? jsonMap['buyer'];
   }
 
   Map<String, dynamic> toJson() {
@@ -20,7 +20,7 @@ class RaffleNum {
   }
 
   Map toMap() {
-    Map map = new Map();
+    Map map = {};
     map['number'] = number;
     map['buyer'] = buyer;
     return map;

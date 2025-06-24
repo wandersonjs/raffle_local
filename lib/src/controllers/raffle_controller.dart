@@ -37,12 +37,12 @@ class RaffleController extends ControllerMVC {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(
+          title: const Text(
             "Create new Raffle",
           ),
           content: Form(
             child: SizedBox(
-              height: 300,
+              height: 350,
               child: Column(
                 children: [
                   TextFormField(
@@ -51,7 +51,7 @@ class RaffleController extends ControllerMVC {
                         raffleDetails.premiumDescription = value;
                       });
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Premium description",
                       hintText: "Insert here the permium description",
                     ),
@@ -62,8 +62,8 @@ class RaffleController extends ControllerMVC {
                         raffleDetails.premiumValue = double.parse(value);
                       });
                     },
-                    keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    decoration: const InputDecoration(
                       labelText: "Premium value",
                       hintText: "Insert here the premium value",
                     ),
@@ -74,8 +74,8 @@ class RaffleController extends ControllerMVC {
                         raffleDetails.max = int.parse(value);
                       });
                     },
-                    keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    decoration: const InputDecoration(
                       labelText: "Max quotas",
                       hintText: "Inform here the raffle max quotas",
                     ),
@@ -86,8 +86,8 @@ class RaffleController extends ControllerMVC {
                         raffleDetails.quotaValue = double.parse(value);
                       });
                     },
-                    keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    decoration: const InputDecoration(
                       labelText: "Quota price",
                       hintText: "Inform here the quota price",
                     ),
@@ -122,13 +122,13 @@ class RaffleController extends ControllerMVC {
                   Navigator.of(context).pop();
                 });
               },
-              child: Text("Confirm"),
+              child: const Text("Confirm"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             )
           ],
         );
@@ -168,9 +168,9 @@ class RaffleController extends ControllerMVC {
     //Verifies if the shared preferences contains de the key raffleDetails, if so, retrieve it and pass back to the system.
     if (prefs.containsKey('raffleDetails')) {
       var getDetails = prefs.getString('raffleDetails');
-      RaffleDetails _details = RaffleDetails.fromJson(jsonDecode(getDetails!));
+      RaffleDetails details = RaffleDetails.fromJson(jsonDecode(getDetails!));
       setState(() {
-        raffleDetails = _details;
+        raffleDetails = details;
       });
     }
 
@@ -209,11 +209,11 @@ class RaffleController extends ControllerMVC {
 
   //Select all remaining numbers to sell
   void sellAllRaffleNumbers() {
-    raffleNums.forEach((num) {
+    for (var num in raffleNums) {
       raffleSellingNums.add(num);
       total += raffleDetails.quotaValue;
       setState(() {});
-    });
+    }
     setState(() {
       raffleNums.clear();
     });
@@ -221,10 +221,10 @@ class RaffleController extends ControllerMVC {
 
   //Confirms the selling
   void confirmSelling() {
-    raffleSellingNums.forEach((num) {
+    for (var num in raffleSellingNums) {
       num.buyer = _buyer;
       raffleSoldNums.add(num);
-    });
+    }
     freeNums = raffleNums.length - raffleSellingNums.length;
     setState(() {});
     clearValues();
@@ -465,9 +465,9 @@ class RaffleController extends ControllerMVC {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const  [
+            children: [
               Text(
                 "Earnings",
               ),
@@ -484,7 +484,7 @@ class RaffleController extends ControllerMVC {
                     const Text("Premium value"),
                     Text(
                       "\$ ${raffleDetails.premiumValue}",
-                      style: TextStyle(color: Colors.green),
+                      style: const TextStyle(color: Colors.green),
                     ),
                   ],
                 ),
@@ -494,7 +494,7 @@ class RaffleController extends ControllerMVC {
                     const Text("Sold"),
                     Text(
                       "\$ $total",
-                      style: TextStyle(color: Colors.green),
+                      style: const TextStyle(color: Colors.green),
                     ),
                   ],
                 ),
@@ -620,7 +620,9 @@ class RaffleController extends ControllerMVC {
                           _buyer = value;
                         });
                       },
-                      decoration: const InputDecoration(),
+                      decoration: const InputDecoration(
+                        label: Text('Buyer name'),
+                      ),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please inform the buyer";

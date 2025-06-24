@@ -3,7 +3,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:raffle_local/src/controllers/raffle_controller.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -12,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends StateMVC<MyHomePage> {
-  RaffleController _raffleController = new RaffleController();
+  RaffleController _raffleController = RaffleController();
 
   _MyHomePageState() : super(RaffleController()) {
     _raffleController = controller as RaffleController;
@@ -43,7 +43,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
           _raffleController.raffleDetails.premiumDescription.isNotEmpty
               ? IconButton(
                   onPressed: () => _raffleController.showRaffleDetails(context),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.info_outline,
                   ),
                 )
@@ -51,7 +51,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
           _raffleController.raffleSoldNums.isNotEmpty
               ? IconButton(
                   onPressed: () => _raffleController.getEarnigs(context),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.monetization_on_outlined,
                   ),
                 )
@@ -59,7 +59,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
         ],
       ),
       body: _raffleController.loadingRaffleNums
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -78,19 +78,19 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                     Stack(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: const EdgeInsets.only(top: 10),
                           width: 260,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 children: [
-                                  Text("Total quotas"),
+                                  const Text("Total quotas"),
                                   Text(_raffleController.raffleDetails.max
                                       .toString()),
                                 ],
                               ),
-                              _raffleController.raffleSoldNums.length > 0
+                              _raffleController.raffleSoldNums.isNotEmpty
                                   ? TextButton(
                                       child: Column(
                                         children: [
@@ -119,14 +119,14 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                                     )
                                   : Column(
                                       children: [
-                                        Text('Free'),
+                                        const Text('Free'),
                                         Text(
                                           _raffleController.raffleNums.length
                                               .toString(),
                                         ),
                                       ],
                                     ),
-                              _raffleController.raffleSoldNums.length > 0
+                              _raffleController.raffleSoldNums.isNotEmpty
                                   ? TextButton(
                                       child: Column(
                                         children: [
@@ -156,7 +156,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                                     )
                                   : Column(
                                       children: [
-                                        Text('Sold'),
+                                        const Text('Sold'),
                                         Text(
                                           _raffleController
                                               .raffleSoldNums.length
@@ -172,8 +172,8 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                     _raffleController.raffleNums.isNotEmpty &&
                             _raffleController.selling
                         ? Container(
-                            margin: EdgeInsets.only(top: 10),
-                            child: Row(
+                            margin: const EdgeInsets.only(top: 10),
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Select one of the numbers below"),
@@ -187,7 +187,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                         ? Container(
                             height: height,
                             alignment: Alignment.center,
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
@@ -216,16 +216,16 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Please crete a new raffle!",
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                     IconButton(
                                       onPressed: () => _raffleController
                                           .createRaffle(context),
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.fiber_new,
                                         size: 50,
                                         color: Colors.green,
@@ -235,7 +235,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                                 ),
                               )
                             : Container(
-                                margin: EdgeInsets.only(top: 20),
+                                margin: const EdgeInsets.only(top: 20),
                                 height: height,
                                 width: width,
                                 child: GridView.builder(
@@ -269,7 +269,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                                                         .raffleSoldNums[index]
                                                         .number
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
                                                             FontWeight.w600),
@@ -279,7 +279,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                                                         .raffleNums[index]
                                                         .number
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
                                                             FontWeight.w600),
@@ -315,11 +315,11 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                   _raffleController.raffle(context);
                 },
                 tooltip: 'Sort',
-                child: Icon(
+                child: const Icon(
                   Icons.sort,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 11,
               ),
               FloatingActionButton(
@@ -328,9 +328,9 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                   _raffleController.sellAllRaffleNumbers();
                 },
                 tooltip: 'Sell all numbers',
-                child: Icon(Icons.select_all),
+                child: const Icon(Icons.select_all),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 11,
               ),
               FloatingActionButton(
@@ -340,7 +340,7 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                 tooltip: 'Confirm selling',
                 child: Stack(
                   children: [
-                    Positioned(
+                    const Positioned(
                       top: 20,
                       left: 10,
                       child: Icon(
@@ -351,14 +351,14 @@ class _MyHomePageState extends StateMVC<MyHomePage> {
                       top: 10,
                       right: 10,
                       child: Container(
-                        padding: EdgeInsets.all(1),
+                        padding: const EdgeInsets.all(1),
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           "${_raffleController.raffleSellingNums.length}",
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     )
