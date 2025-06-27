@@ -1,13 +1,39 @@
-#Raffle_Local
-A fun and straightforward local raffle system
+# 🎟️ Raffle App – Flutter + SQLite
 
-##Getting Started
-Welcome to the Raffle_Local system! This project, although created for fun, is fully functional and provides the following features:
+A simple and fully offline mobile application for managing a single raffle at a time. Developed as a personal project to explore Flutter and local data persistence using SQLite.
 
-Create a Raffle: Set up your own raffle effortlessly.
+## 📱 Features
 
-Sort Numbers: Randomly generate numbers for the raffle.
+- **Single Raffle Management**
+  - Register one raffle at a time
+  - Define prize name, prize value, ticket (quota) value, and total number of tickets
 
-Show Raffle Results: Display the results of the raffle in an organized manner.
+- **Ticket Sales**
+  - Select one or multiple ticket numbers for sale
+  - Option to select all available numbers at once
+  - Assign buyer information to sold tickets
 
-Whether you’re hosting a small gathering or just looking for a fun project to play around with, Raffle_Local has got you covered!
+- **Automated Drawing**
+  - Drawing is only allowed if at least one ticket has been sold
+  - Random selection among sold numbers
+  - Displays the winning number and buyer details
+
+- **Offline Functionality**
+  - All data is stored locally using SQLite
+  - No internet connection required
+
+- **User Interface**
+  - Clean and responsive UI built with Flutter
+  - Simple navigation and intuitive interactions
+
+## 🛠️ Technologies Used
+
+- [Flutter](https://flutter.dev/)
+- [Dart](https://dart.dev/)
+- [SQLite](https://pub.dev/packages/sqflite)
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/raffle-app.git
